@@ -3,7 +3,7 @@
   command = "pip install -r requirements.txt"
   
   # Directorio donde Netlify buscará tus funciones serverless
-  functions = "/netlify/functions/"
+  functions = "netlify/functions/"
 
 # Redirección clave para que todas las peticiones lleguen a tu app de Flask
 [[redirects]]
