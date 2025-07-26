@@ -12,7 +12,7 @@ app = Flask(__name__)
 model = joblib.load("model/model.pkl")
 
 @app.route("/", methods=["GET", "POST"])
-def index():
+def index(path):
     resultado = None
     fig_json = None
 
@@ -33,7 +33,7 @@ def index():
     fig = px.bar(df_demo, x="Variable", y="Valor Promedio", title="Variables promedio")
     fig_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template("index.html", resultado=resultado, fig=fig_json)
+    return render_template(f"{path}/index.html", resultado=resultado, fig=fig_json)
 
 # Esta es la función que Netlify ejecutará en cada petición
 def handler(event, context):
