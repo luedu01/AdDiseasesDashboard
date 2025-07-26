@@ -15,3 +15,4 @@
   
   # Código 200 para que la URL no cambie en el navegador (es una reescritura, no una redirección)
   status = 200
+  
