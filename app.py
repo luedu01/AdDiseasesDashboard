@@ -15,16 +15,7 @@ def index():
     resultado = None
     fig_json = None
 
-    if request.method == "POST":
-        try:
-             features = [float(request.form[col]) for col in ['age', 'bmi', 'bp', 's6']]
-             df_pred = pd.DataFrame([features], columns=['age', 'bmi', 'bp', 's6'])
-             pred = model.predict(df_pred)[0]
-             resultado = f"Riesgo estimado de diabetes: {pred:.4f}"
-        except Exception as e:
-             resultado = f"Error en la predicción: {str(e)}"
-
-    # Mostrar grafico
+        # Mostrar grafico
     df_demo = pd.DataFrame({
         "Variable": ["Age", "BMI", "BP", "GLU"],
         "Valor Promedio": [0.03, 0.04, 0.05, 0.02]
@@ -32,7 +23,23 @@ def index():
     fig = px.bar(df_demo, x="Variable", y="Valor Promedio", title="Variables promedio")
     fig_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template("index.html", resultado=resultado, fig=fig_json)
+    if request.method == "POST":
+        try:
+             features = [float(request.form[col]) for col in ['age', 'bmi', 'bp', 's6']]
+             df_pred = pd.DataFrame([features], columns=['age', 'bmi', 'bp', 's6'])
+             #features = [float(request.form[col]) for col in ['age', 'bmi', 'bp']]
+             #df_pred = pd.DataFrame([features], columns=['age', 'bmi', 'bp'])
+             pred = model.predict(df_pred)[0]
+             if pred > 0:
+                resultado = "Propenso a enfermedades"
+             else:
+                 resultado = "Saludable"
+        except Exception as e:
+             resultado = f"Error en la predicción: {str(e)}"
+
+        return render_template("index.html", resultado=resultado, fig=fig_json)
+
+    return render_template("index.html", resultado=None, fig=None)
 
 if __name__ == "__main__":
     #app.run(debug=True)
