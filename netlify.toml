@@ -11,7 +11,7 @@
   from = "/*"
   
   # Envía la petición a la función 'api.py'
-  to = "/.netlify/functions/api"
+  to = "/.netlify/functions/app"
   
   # Código 200 para que la URL no cambie en el navegador (es una reescritura, no una redirección)
   status = 200
