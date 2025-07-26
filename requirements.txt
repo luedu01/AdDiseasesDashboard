@@ -1,6 +1,6 @@
 Flask
-serverless-wsgi
 scikit-learn
 joblib
 plotly
 pandas
+gunicorn
