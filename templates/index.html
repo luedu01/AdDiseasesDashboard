@@ -1,0 +1,57 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Diabetes</title>
+    <!-- Vincular hoja de estilos  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts para mejorar tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Plotly para visualización -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!--  Encabezado con imagen decorativa -->
+    <header>
+        <img src="{{ url_for('static', filename='diabetes_banner.jpg') }}" alt="Banner de Diabetes">
+        <h1>Predicción del Riesgo de Diabetes</h1>
+    </header>
+
+    <!--  Contenedor principal -->
+    <main>
+        <section class="formulario">
+            <form method="post">
+                <label for="age">Edad (normalizada):</label>
+                <input type="text" name="age" id="age" placeholder="Ej: 0.45">
+
+                <label for="bmi">BMI (normalizada):</label>
+                <input type="text" name="bmi" id="bmi" placeholder="Ej: 0.67">
+
+                <label for="bp">Presión arterial (normalizada):</label>
+                <input type="text" name="bp" id="bp" placeholder="Ej: 0.32">
+
+                <label for="s6">Glucosa (normalizada):</label>
+                <input type="text" name="s6" id="s6" placeholder="Ej: 0.28">    
+
+                <input type="submit" value="Predecir">
+            </form>
+
+            {% if resultado %}
+            <div class="resultado">
+                <h2>{{ resultado }}</h2>
+            </div>
+            {% endif %}
+        </section>
+
+        <!--  Gráfico Plotly -->
+        <section id="grafico-container">
+            <div id="grafico"></div>
+        </section>
+    </main>
+
+    <!--  Script de gráfico -->
+    <script>
+        var fig = {{ fig | safe }};
+        Plotly.newPlot('grafico', fig.data, fig.layout);    
+    </script>
+</body>
+</html>
