@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from serverless_wsgi import handle 
 import pandas as pd
 import joblib
 import plotly.express as px
