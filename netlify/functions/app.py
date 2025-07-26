@@ -11,7 +11,8 @@ app = Flask(__name__)
 # Cargar modelo
 model = joblib.load("model/model.pkl")
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"], defaults={'path': ''})
+@app.route('/<path:path>')
 def index(path):
     resultado = None
     fig_json = None
