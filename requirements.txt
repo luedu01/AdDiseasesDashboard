@@ -1,6 +1,5 @@
 Flask
 serverless-wsgi
-flask
 scikit-learn
 joblib
 plotly
