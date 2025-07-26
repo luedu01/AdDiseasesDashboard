@@ -34,7 +34,7 @@ def index(path):
     fig = px.bar(df_demo, x="Variable", y="Valor Promedio", title="Variables promedio")
     fig_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    return render_template(f"{path}/index.html", resultado=resultado, fig=fig_json)
+    return render_template(f"/{path}/index.html", resultado=resultado, fig=fig_json)
 
 # Esta es la función que Netlify ejecutará en cada petición
 def handler(event, context):
